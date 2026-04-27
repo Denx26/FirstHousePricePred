@@ -32,6 +32,15 @@ POST JSON to `http://localhost:8000/predict` with body like:
 python app/gradio_app.py
 ```
 
+5) Run with Docker:
+```bash
+# Build the image
+docker build -t house-price-pred .
+
+# Run the container
+docker run -p 7860:7860 house-price-pred
+```
+
 Notes
 - The Gradio UI provides a simple chat-like interface for providing structured features and seeing the model reply.
 - For deployment, you can deploy the FastAPI app to services such as Railway, Fly.io, or a Docker container on any host. The Gradio app is intended for local/quick demos; for production use the API and a separate frontend.
