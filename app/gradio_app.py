@@ -2,7 +2,7 @@ import joblib
 from pathlib import Path
 import pandas as pd
 import gradio as gr
-from matplotlib import pyplot as plt
+import matplotlib as plt
 import numpy as np
 
 MODEL_PATH = Path(__file__).resolve().parents[1] / "models" / "model.joblib"
