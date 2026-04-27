@@ -3,6 +3,7 @@ from pathlib import Path
 import pandas as pd
 import gradio as gr
 from matplotlib import pyplot as plt
+import numpy as np
 
 MODEL_PATH = Path(__file__).resolve().parents[1] / "models" / "model.joblib"
 
@@ -37,8 +38,12 @@ def predict_structured(area, bedrooms, bathrooms, stories,
 
 
 def plot_prediction_scatter(y_true, y_pred, out_path):
+    if len(y_true) == 0 or len(y_pred) == 0 :
+        return
+    y_true = np.array(y_true)
+    y_pred = np.array(y_pred)
     plt.figure()
-    plt.scatter(y_true, y_pred, aplha=0.3)
+    plt.scatter(y_true, y_pred, alpha=0.3)
     plt.xlabel("Ture Prices")
     plt.ylabel("Predicted Prices")
     plt.title("True vs Predicted House Prices")
@@ -80,7 +85,7 @@ def run_gradio():
         predict_btn.click(on_predict, inputs=[area, bedrooms, bathrooms, stories, mainroad, guestroom, basement, hotwaterheating, airconditioning, parking, prefarea, furnishingstatus], outputs=chatbot)
 
 
-    demo.launch(server_name="0.0.0.0", share=False)
+    demo.launch(server_name="0.0.0.0", share=True)
 
 
 if __name__ == "__main__":
